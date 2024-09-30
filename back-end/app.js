@@ -10,15 +10,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 app.use('/images', express.static('public/images'));
-
 
 mongoose
   .connect(`${process.env.DB_CONNECTION_STRING}`)
   .then(data => console.log(`Connected to MongoDB`))
   .catch(err => console.error(`Failed to connect: ${err}`));
-
 
 const { Message } = require('./models/Message');
 const { User } = require('./models/User');
@@ -53,15 +50,14 @@ app.post('/messages/save', async (req, res) => {
   }
 });
 
-// About Us route
+// About Us PAGE
 app.get('/about-us', (req, res) => {
   const aboutUsData = {
-    text: "Hi! My name is Raiyan! I do web development and I like to sleep!",
+    text: "Hi! My name is Raiyan! I switched into computer science my junior year, so I've been playing catchup, but I love it so much more than organic chemistry. In my free time, I compete on the NYU Taekwondo Team + embark on my lifelong quest of finding the best hidden gem delis in the city. This image below I actually created using an ascii converter website. Its pretty cool in my opinion, but it took me a while to figure out the spacing because it copy pasted into my editor weird.",
     imageUrl: "http://localhost:7002/images/raiyan-photo.jpg"
   };
 
   res.json(aboutUsData);
 });
 
-// Export the app
 module.exports = app;
